@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Literacy Course - Empowering Digital Learning</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #06b6d4;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --border-radius: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .accessibility-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .font-size-control, .voice-control, .language-control {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .font-size-control:hover, .voice-control:hover, .language-control:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Section */
+        .hero {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Tutorials Section */
+        .tutorial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tutorial-card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .tutorial-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .tutorial-content {
+            padding: 1.5rem;
+        }
+
+        .tutorial-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .tutorial-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-progress {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* AI Chat Section */
+        .chat-container {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--bg-light);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            background: var(--bg-white);
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            max-width: 70%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message.user .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .send-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-button:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Feedback Section */
+        .feedback-form {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            color: var(--accent-color);
+        }
+
+        /* Voice Recognition */
+        .voice-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+
+        .voice-indicator.active {
+            display: block;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .tutorial-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Font Size Classes */
+        .font-small { font-size: 0.9rem; }
+        .font-medium { font-size: 1rem; }
+        .font-large { font-size: 1.2rem; }
+        .font-xlarge { font-size: 1.4rem; }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Digital Literacy Course
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('tutorials')">Tutorials</a></li>
+                <li><a href="#" onclick="showSection('chat')">AI Chat</a></li>
+                <li><a href="#" onclick="showSection('feedback')">Feedback</a></li>
+            </ul>
+            <div class="accessibility-controls">
+                <button class="font-size-control" onclick="changeFontSize()">
+                    <i class="fas fa-text-height"></i> Font
+                </button>
+                <button class="voice-control" onclick="toggleVoiceRecognition()">
+                    <i class="fas fa-microphone"></i> Voice
+                </button>
+                <select class="language-control" onchange="changeLanguage(this.value)" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Welcome to Digital Literacy</h1>
+                <p class="tagline">Empowering Digital Literacy!</p>
+                <p>Learn digital tools with confidence. Our step-by-step guides make technology accessible for everyone, especially parents and elderly users.</p>
+                <button class="cta-button" onclick="showSection('tutorials')">
+                    <i class="fas fa-play"></i> Start Learning
+                </button>
+                <button class="cta-button" onclick="showSection('chat')">
+                    <i class="fas fa-robot"></i> Ask DigiBuddy
+                </button>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3>Mobile Apps</h3>
+                    <p>Learn WhatsApp, Paytm, Google Maps and other essential mobile applications with easy-to-follow tutorials.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3>AI Assistant</h3>
+                    <p>Get instant help from DigiBuddy, our friendly AI chatbot that answers your digital questions 24/7.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-universal-access feature-icon"></i>
+                    <h3>Accessibility</h3>
+                    <p>Voice commands, adjustable fonts, and multi-language support make learning comfortable for everyone.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-video feature-icon"></i>
+                    <h3>Video Guides</h3>
+                    <p>Watch step-by-step video tutorials that break down complex tasks into simple, manageable steps.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Section -->
+        <section id="tutorials" class="section">
+            <div class="hero">
+                <h1>Learning Tutorials</h1>
+                <p>Choose from our comprehensive collection of digital literacy tutorials</p>
+            </div>
+
+            <div class="tutorial-cards">
+                <div class="tutorial-card" onclick="openTutorial('whatsapp')">
+                    <div class="tutorial-image">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">WhatsApp Basics</h3>
+                        <p class="tutorial-description">Learn to send messages, make calls, and share photos with family and friends.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> 75% Complete</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('paytm')">
+                    <div class="tutorial-image">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">Paytm & Digital Payments</h3>
+                        <p class="tutorial-description">Master digital payments, bill payments, and money transfers safely.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> 45% Complete</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('maps')">
+                    <div class="tutorial-image">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">Google Maps Navigation</h3>
+                        <p class="tutorial-description">Find locations, get directions, and discover places around you.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 30%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> 30% Complete</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('email')">
+                    <div class="tutorial-image">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">Email Essentials</h3>
+                        <p class="tutorial-description">Send, receive, and organize emails like a pro with Gmail basics.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 60%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> 60% Complete</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('video-calls')">
+                    <div class="tutorial-image">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">Video Calling</h3>
+                        <p class="tutorial-description">Connect with loved ones through video calls on various platforms.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 20%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> 20% Complete</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('safety')">
+                    <div class="tutorial-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 class="tutorial-title">Digital Safety</h3>
+                        <p class="tutorial-description">Learn to stay safe online and protect your personal information.</p>
+                        <div class="tutorial-progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <p><strong>Progress:</strong> Not Started</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Chat Section -->
+        <section id="chat" class="section">
+            <div class="hero">
+                <h1>Meet DigiBuddy</h1>
+                <p>Your friendly AI assistant for all digital questions</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i>
+                    <span>DigiBuddy - AI Assistant</span>
+                    <div style="margin-left: auto;">
+                        <i class="fas fa-circle" style="color: #10b981; font-size: 0.8rem;"></i>
+                        <span style="font-size: 0.9rem;">Online</span>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message">
+                        <div class="message-content">
+                            <strong>DigiBuddy:</strong> Hello! I'm DigiBuddy, your digital learning assistant. How can I help you today? You can ask me about WhatsApp, Paytm, Google Maps, or any other digital tool!
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your question here..." onkeypress="handleChatKeyPress(event)">
+                    <button class="send-button" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="section">
+            <div class="hero">
+                <h1>Your Feedback Matters</h1>
+                <p>Help us improve your learning experience</p>
+            </div>
+
+            <div class="feedback-form">
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="course">Which tutorial did you try?</label>
+                        <select id="course" name="course" required>
+                            <option value="">Select a tutorial</option>
+                            <option value="whatsapp">WhatsApp Basics</option>
+                            <option value="paytm">Paytm & Digital Payments</option>
+                            <option value="maps">Google Maps Navigation</option>
+                            <option value="email">Email Essentials</option>
+                            <option value="video-calls">Video Calling</option>
+                            <option value="safety">Digital Safety</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Overall Rating:</label>
+                        <div class="rating-stars" id="ratingStars">
+                            <span class="star" onclick="setRating(1)">★</span>
+                            <span class="star" onclick="setRating(2)">★</span>
+                            <span class="star" onclick="setRating(3)">★</span>
+                            <span class="star" onclick="setRating(4)">★</span>
+                            <span class="star" onclick="setRating(5)">★</span>
+                        </div>
+                        <input type="hidden" id="rating" name="rating" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback">Your Feedback:</label>
+                        <textarea id="feedbackText" name="feedback" rows="5" placeholder="Tell us about your experience..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="suggestions">Suggestions for Improvement:</label>
+                        <textarea id="suggestions" name="suggestions" rows="3" placeholder="What would you like to see improved or added?"></textarea>
+                    </div>
+
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div class="voice-indicator" id="voiceIndicator">
+        <i class="fas fa-microphone"></i>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentFontSize = 1;
+        let isVoiceActive = false;
+        let currentLanguage = 'en';
+        let currentRating = 0;
+
+        // Navigation
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.style.background = 'none');
+            event.target.style.background = 'rgba(79, 70, 229, 0.1)';
+        }
+
+        // Font Size Control
+        function changeFontSize() {
+            const sizes = ['font-small', 'font-medium', 'font-large', 'font-xlarge'];
+            document.body.classList.remove(...sizes);
+            currentFontSize = (currentFontSize % 4) + 1;
+            
+            if (currentFontSize > 1) {
+                document.body.classList.add(sizes[currentFontSize - 1]);
+            }
+            
+            // Announce the change
+            speak(`Font size changed to ${sizes[currentFontSize - 1].replace('font-', '')}`);
+        }
+
+        // Voice Recognition
+        function toggleVoiceRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = currentLanguage === 'hi' ? 'hi-IN' : currentLanguage === 'es' ? 'es-ES' : 'en-US';
+
+                if (!isVoiceActive) {
+                    recognition.start();
+                    isVoiceActive = true;
+                    document.getElementById('voiceIndicator').classList.add('active');
+                    speak('Voice recognition activated. What would you like to know?');
+                } else {
+                    recognition.stop();
+                    isVoiceActive = false;
+                    document.getElementById('voiceIndicator').classList.remove('active');
+                }
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    handleVoiceCommand(transcript);
+                    isVoiceActive = false;
+                    document.getElementById('voiceIndicator').classList.remove('active');
+                };
+
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    isVoiceActive = false;
+                    document.getElementById('voiceIndicator').classList.remove('active');
+                    speak('Sorry, I could not understand. Please try again.');
+                };
+            } else {
+                alert('Voice recognition is not supported in this browser.');
+            }
+        }
+
+        // Handle Voice Commands
+        function handleVoiceCommand(command) {
+            const lowerCommand = command.toLowerCase();
+            
+            if (lowerCommand.includes('home') || lowerCommand.includes('homepage')) {
+                showSection('home');
+                speak('Navigating to home page');
+            } else if (lowerCommand.includes('tutorial') || lowerCommand.includes('learn')) {
+                showSection('tutorials');
+                speak('Opening tutorials section');
+            } else if (lowerCommand.includes('chat') || lowerCommand.includes('digibuddy')) {
+                showSection('chat');
+                speak('Opening AI chat with DigiBuddy');
+            } else if (lowerCommand.includes('feedback')) {
+                showSection('feedback');
+                speak('Opening feedback form');
+            } else if (lowerCommand.includes('whatsapp')) {
+                openTutorial('whatsapp');
+                speak('Opening WhatsApp tutorial');
+            } else if (lowerCommand.includes('paytm') || lowerCommand.includes('payment')) {
+                openTutorial('paytm');
+                speak('Opening Paytm tutorial');
+            } else if (lowerCommand.includes('maps') || lowerCommand.includes('navigation')) {
+                openTutorial('maps');
+                speak('Opening Google Maps tutorial');
+            } else {
+                // Send voice command to chat
+                document.getElementById('chatInput').value = command;
+                sendMessage();
+                speak('I sent your question to DigiBuddy');
+            }
+        }
+
+        // Text-to-Speech
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = currentLanguage === 'hi' ? 'hi-IN' : currentLanguage === 'es' ? 'es-ES' : 'en-US';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Language Change
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            updateLanguageContent(lang);
+            speak('Language changed successfully');
+        }
+
+        function updateLanguageContent(lang) {
+            const translations = {
+                'hi': {
+                    'Welcome to Digital Literacy': 'डिजिटल साक्षरता में आपका स्वागत है',
+                    'Empowering Digital Literacy!': 'डिजिटल साक्षरता को सशक्त बनाना!',
+                    'Start Learning': 'सीखना शुरू करें',
+                    'Ask DigiBuddy': 'डिजीबडी से पूछें'
+                },
+                'es': {
+                    'Welcome to Digital Literacy': 'Bienvenido a la Alfabetización Digital',
+                    'Empowering Digital Literacy!': '¡Empoderando la Alfabetización Digital!',
+                    'Start Learning': 'Comenzar a Aprender',
+                    'Ask DigiBuddy': 'Pregunta a DigiBuddy'
+                }
+            };
+
+            if (translations[lang]) {
+                Object.entries(translations[lang]).forEach(([english, translated]) => {
+                    const elements = document.querySelectorAll('*');
+                    elements.forEach(el => {
+                        if (el.textContent.trim() === english) {
+                            el.textContent = translated;
+                        }
+                    });
+                });
+            }
+        }
+
+        // Tutorial Functions
+        function openTutorial(tutorialType) {
+            const tutorials = {
+                'whatsapp': {
+                    title: 'WhatsApp Basics Tutorial',
+                    content: `
+                        <h2>Step 1: Installing WhatsApp</h2>
+                        <p>1. Open Google Play Store or App Store</p>
+                        <p>2. Search for "WhatsApp"</p>
+                        <p>3. Tap "Install" and wait for download</p>
+                        
+                        <h2>Step 2: Setting Up</h2>
+                        <p>1. Open WhatsApp</p>
+                        <p>2. Enter your phone number</p>
+                        <p>3. Verify with the code sent via SMS</p>
+                        
+                        <h2>Step 3: Sending Messages</h2>
+                        <p>1. Tap on "Chats" at bottom</p>
+                        <p>2. Tap the green message icon</p>
+                        <p>3. Select a contact</p>
+                        <p>4. Type your message and tap send</p>
+                    `
+                },
+                'paytm': {
+                    title: 'Paytm & Digital Payments Tutorial',
+                    content: `
+                        <h2>Step 1: Setting Up Paytm</h2>
+                        <p>1. Download Paytm app from Play Store</p>
+                        <p>2. Sign up with your mobile number</p>
+                        <p>3. Complete KYC verification</p>
+                        
+                        <h2>Step 2: Adding Money</h2>
+                        <p>1. Tap "Add Money" on home screen</p>
+                        <p>2. Enter amount</p>
+                        <p>3. Choose payment method (bank/card)</p>
+                        
+                        <h2>Step 3: Making Payments</h2>
+                        <p>1. Scan QR code or enter mobile number</p>
+                        <p>2. Enter amount</p>
+                        <p>3. Add note (optional)</p>
+                        <p>4. Tap "Pay" and confirm with PIN</p>
+                    `
+                },
+                'maps': {
+                    title: 'Google Maps Navigation Tutorial',
+                    content: `
+                        <h2>Step 1: Basic Search</h2>
+                        <p>1. Open Google Maps</p>
+                        <p>2. Tap the search bar at top</p>
+                        <p>3. Type location name or address</p>
+                        <p>4. Select from suggestions</p>
+                        
+                        <h2>Step 2: Getting Directions</h2>
+                        <p>1. Tap "Directions" button</p>
+                        <p>2. Choose transport mode (car/walk/bus)</p>
+                        <p>3. Tap "Start" to begin navigation</p>
+                        
+                        <h2>Step 3: Exploring Nearby</h2>
+                        <p>1. Tap "Explore" at bottom</p>
+                        <p>2. Browse categories (restaurants, gas, etc.)</p>
+                        <p>3. Tap on any place for details</p>
+                    `
+                }
+            };
+
+            if (tutorials[tutorialType]) {
+                const tutorial = tutorials[tutorialType];
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    z-index: 2000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `;
+
+                modal.innerHTML = `
+                    <div style="
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 16px;
+                        max-width: 600px;
+                        max-height: 80vh;
+                        overflow-y: auto;
+                        position: relative;
+                    ">
+                        <button onclick="this.parentElement.parentElement.remove()" style="
+                            position: absolute;
+                            top: 1rem;
+                            right: 1rem;
+                            background: none;
+                            border: none;
+                            font-size: 1.5rem;
+                            cursor: pointer;
+                        ">×</button>
+                        <h1>${tutorial.title}</h1>
+                        ${tutorial.content}
+                        <button onclick="speak('Tutorial content read aloud')" style="
+                            background: var(--primary-color);
+                            color: white;
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            margin-top: 1rem;
+                        ">
+                            <i class="fas fa-volume-up"></i> Read Aloud
+                        </button>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+                speak(`Opening ${tutorial.title}`);
+            }
+        }
+
+        // Chat Functions
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const response = generateAIResponse(message);
+                    addMessage(response, 'bot');
+                    speak(response);
+                }, 1000);
+            }
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = sender === 'bot' ? `<strong>DigiBuddy:</strong> ${content}` : content;
+            
+            messageDiv.appendChild(messageContent);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateAIResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            const responses = {
+                'whatsapp': "To use WhatsApp: 1) Install from Play Store, 2) Verify your number, 3) Start chatting! Would you like me to walk you through any specific step?",
+                'paytm': "For Paytm payments: 1) Add money to wallet, 2) Scan QR or enter number, 3) Enter amount and PIN. Always verify the recipient before paying!",
+                'maps': "Google Maps helps you navigate: 1) Search for places, 2) Get directions, 3) Explore nearby locations. Try searching for a nearby restaurant!",
+                'email': "For email: 1) Open Gmail app, 2) Tap compose, 3) Add recipient, subject, and message, 4) Tap send. Remember to check your sent folder!",
+                'video': "For video calls: 1) Use WhatsApp Video, Google Meet, or Zoom, 2) Tap video call icon, 3) Ensure good internet connection. Test your camera first!",
+                'safety': "Stay safe online: 1) Never share passwords, 2) Don't click suspicious links, 3) Verify before making payments, 4) Keep apps updated.",
+                'help': "I can help you with WhatsApp, Paytm, Google Maps, Email, Video calling, and Digital Safety. What would you like to learn about?",
+                'hello': "Hello! I'm DigiBuddy, your digital learning assistant. I'm here to help you learn technology step by step. What would you like to know?",
+                'thank': "You're welcome! I'm always here to help you learn. Feel free to ask me anything about digital tools and apps!"
+            };
+
+            // Find matching response
+            for (const [key, response] of Object.entries(responses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+
+            // Default response
+            return "I understand you're asking about digital tools. I can help you with WhatsApp, Paytm, Google Maps, Email, Video calls, and Digital Safety. Could you be more specific about what you'd like to learn?";
+        }
+
+        // Feedback Functions
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('rating').value = rating;
+            
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+            
+            speak(`Rating set to ${rating} stars`);
+        }
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const feedback = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                course: formData.get('course'),
+                rating: currentRating,
+                feedback: formData.get('feedback'),
+                suggestions: formData.get('suggestions'),
+                timestamp: new Date().toISOString()
+            };
+
+            // Store feedback in memory (localStorage not available in Claude.ai)
+            const existingFeedback = [];
+            existingFeedback.push(feedback);
+            console.log('Feedback stored:', feedback);
+
+            // Show success message
+            alert('Thank you for your feedback! Your input helps us improve the learning experience.');
+            speak('Thank you for your valuable feedback');
+            
+            // Reset form
+            event.target.reset();
+            currentRating = 0;
+            document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add welcome speech
+            setTimeout(() => {
+                speak('Welcome to Digital Literacy Course. Use voice commands or navigate with buttons to start learning.');
+            }, 1000);
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(event) {
+                if (event.altKey) {
+                    switch(event.key) {
+                        case '1':
+                            showSection('home');
+                            break;
+                        case '2':
+                            showSection('tutorials');
+                            break;
+                        case '3':
+                            showSection('chat');
+                            break;
+                        case '4':
+                            showSection('feedback');
+                            break;
+                    }
+                }
+            });
+
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.feature-card, .tutorial-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Note: Service Worker functionality disabled for Claude.ai compatibility
+
+        // Analytics (placeholder for real implementation)
+        function trackUserAction(action, details) {
+            console.log('User Action:', action, details);
+            // In real implementation, send to analytics service
+        }
+
+        // Error handling
+        window.addEventListener('error', function(event) {
+            // Only log non-critical errors to avoid service worker issues
+            if (!event.error?.message?.includes('serviceWorker') && !event.error?.message?.includes('SecurityError')) {
+                console.error('Website error:', event.error);
+                speak('Sorry, something went wrong. Please try again or ask for help.');
+            }
+        });
+    </script>
+</body>
+</html>
